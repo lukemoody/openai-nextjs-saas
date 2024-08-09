@@ -1,5 +1,5 @@
 "use client";
-import Post from "@/components/nav/items/Post";
+import Post from "@/components/items/Post";
 import PostSkeleton from "@/components/skeletons/PostSkeleton"; // import { deletePost, getPosts } from "@/lib/functions";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
