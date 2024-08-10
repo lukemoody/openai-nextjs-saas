@@ -1,7 +1,7 @@
 "use client";
-// import { refetchCreditsAtom } from "@/atoms/flagAtom";
+// import { refetchCreditsAtom } from '@/atoms/profileAtom'
 import { tones } from "@/data/tones";
-// import { generatePost } from "@/lib/functions";
+import { generatePost } from "@/lib/functions";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,27 +24,28 @@ export default withPageAuthRequired(function Page() {
   });
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    //reset all the flags
-    // setHasSubmitted(true);
-    // setError(false);
-    // setSuccess(false);
-    // setIsWaitingForResponse(true);
-    // //send the request
-    // const res = await generatePost(postPrompt);
+    // reset all the flags
+    setHasSubmitted(true);
+    setError(false);
+    setSuccess(false);
+    setIsWaitingForResponse(true);
+    // send the request
+    const res = await generatePost(postPrompt);
     // setRefetchCredits((prev) => !prev);
-    // await res
-    //   .json()
-    //   .then((data) => {
-    //     setIsWaitingForResponse(false);
-    //     setHasSubmitted(false);
-    //     setSuccess(true);
-    //     setPost(data.post);
-    //   })
-    //   .catch((err) => {
-    //     setIsWaitingForResponse(false);
-    //     setHasSubmitted(false);
-    //     setError(true);
-    //   });
+    await res
+      .json()
+      .then((data) => {
+        console.log("DATA", data);
+        setIsWaitingForResponse(false);
+        setHasSubmitted(false);
+        setSuccess(true);
+        setPost(data.post);
+      })
+      .catch((err) => {
+        setIsWaitingForResponse(false);
+        setHasSubmitted(false);
+        setError(true);
+      });
   }
   return (
     <section className="w-full flex flex-col items-center">

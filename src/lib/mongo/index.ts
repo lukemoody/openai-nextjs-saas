@@ -3,8 +3,8 @@ import { Db, MongoClient } from "mongodb";
 let uri = process.env.NEXT_PUBLIC_MONGO_URI || "";
 let dbName = process.env.NEXT_PUBLIC_MONGO_DB;
 
-let cachedClient : MongoClient | null = null;
-let cachedDb : Db | null = null;
+let cachedClient: MongoClient | null = null;
+let cachedDb: Db | null = null;
 
 if (!uri) {
   throw new Error(
