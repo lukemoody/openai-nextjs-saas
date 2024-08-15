@@ -1,5 +1,5 @@
 "use client";
-// import { refetchCreditsAtom } from '@/atoms/profileAtom'
+import { refetchCreditsAtom } from "@/atoms/flagAtom";
 import { tones } from "@/data/tones";
 import { generatePost } from "@/lib/functions";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
@@ -14,8 +14,8 @@ export default withPageAuthRequired(function Page() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
-  //   const [refetchCredits, setRefetchCredits] =
-  //     useRecoilState(refetchCreditsAtom);
+  const [refetchCredits, setRefetchCredits] =
+    useRecoilState(refetchCreditsAtom);
   const [postPrompt, setPostPrompt] = useState<PostPrompt>({
     title: "",
     description: "",
@@ -31,7 +31,7 @@ export default withPageAuthRequired(function Page() {
     setIsWaitingForResponse(true);
     // send the request
     const res = await generatePost(postPrompt);
-    // setRefetchCredits((prev) => !prev);
+    setRefetchCredits((prev) => !prev);
     await res
       .json()
       .then((data) => {

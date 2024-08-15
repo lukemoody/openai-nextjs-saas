@@ -2,30 +2,34 @@
 import Post from "@/components/items/Post";
 import PostSkeleton from "@/components/skeletons/PostSkeleton"; // import { deletePost, getPosts } from "@/lib/functions";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
-import Link from "next/link";
+// import Link from "next/link";
 import { useEffect, useState } from "react";
+import { deletePost, getPosts } from "@/lib/functions";
 
 export default withPageAuthRequired(function Page() {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [fetchedPosts, setFetchedPosts] = useState<PostWithId[]>([]);
 
-  //   useEffect(() => {
-  //     async function fetchPosts() {
-  //       await getPosts().then((posts) => {
-  //         setFetchedPosts(posts);
-  //         setLoadingPosts(false);
-  //         console.log(posts);
-  //       });
-  //     }
-  //     fetchPosts();
-  //   }, []);
+  useEffect(() => {
+    async function fetchPosts() {
+      await getPosts().then((posts) => {
+        setFetchedPosts(posts);
+        setLoadingPosts(false);
+        console.log(posts);
+      });
+    }
+    fetchPosts();
+  }, []);
 
   function handleDeletePost(_id: string) {
-    // async function handler() {
-    //   await deletePost(_id);
-    // }
-    // setFetchedPosts((prev) => prev.filter((post) => post._id !== _id));
-    // handler();
+    async function handler() {
+      await deletePost(_id);
+    }
+
+    // Update fetchedPosts state, removing the speiifc post being deleted using filter() so
+    // frontend UI shows correct list of posts
+    setFetchedPosts((prev) => prev.filter((post) => post._id !== _id));
+    handler();
   }
 
   return (
