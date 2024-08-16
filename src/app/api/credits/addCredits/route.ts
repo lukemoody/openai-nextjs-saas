@@ -58,7 +58,7 @@ export const POST = withApiAuthRequiredExtended(
         cancel_url: `${process.env.NEXT_PUBLIC_URL}/profile`,
         payment_intent_data: {
           metadata: {
-            uid: user.sub,
+            uid: user.sub, // This helps us get the user ID after successful payment in webhook
           },
         },
         metadata: {
