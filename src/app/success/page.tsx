@@ -1,13 +1,14 @@
 "use client";
-import Link from "next/link";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
-// withPageAuthRequired protects page from unauthorized access
 export default withPageAuthRequired(function Page() {
   return (
-    <main>
-      <h1>Success</h1>
-      <Link href="/">Go to Homepage</Link>
-    </main>
+    <section className="w-full flex flex-col items-center">
+      <section className="w-[95%] max-w-4xl flex flex-col items-center gap-4">
+        <h1 className="text-4xl font-bold text-center mt-4 text-indigo-600">
+          Thank you for your purchase!
+        </h1>
+      </section>
+    </section>
   );
 });
